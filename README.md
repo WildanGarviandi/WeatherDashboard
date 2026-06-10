@@ -2,6 +2,8 @@
 
 A beautiful, responsive weather dashboard built with **Python Flask** and **Tailwind CSS**. This application provides real-time weather updates, a multi-day forecast, and personalized activity recommendations based on current conditions.
 
+![demo-image](demo.png)
+
 ## ✨ Features
 
 - **Current Weather**: Real-time temperature, humidity, wind speed, and atmospheric conditions (feels like).
