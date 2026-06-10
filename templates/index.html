@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ _("Weather Dashboard") }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-400 to-indigo-600 min-h-screen p-4 md:p-8">
+    <div class="max-w-5xl mx-auto">
+        <!-- Header -->
+        <header class="mb-8 flex justify-between items-end text-white">
+            <div>
+                <h1 class="text-4xl font-bold">{{ city }}</h1>
+                <p class="opacity-90">Today, June 10, 2026</p>
+            </div>
+            <div class="bg-white/20 p-3 rounded-full text-sm">
+                {{ _("Update: Just Now") }}
+            </div>
+        </header>
+
+        <!-- Main Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <!-- Current Weather Card -->
+            <div class="md:col-span-2 glass rounded-3xl p-8 shadow-xl text-gray-800 flex flex-col justify-center items-center">
+                <h2 class="text-xl font-semibold mb-4 opacity-60 uppercase tracking-widest">{{ _("Current Weather") }}</h2>
+                <div class="flex items-center gap-4">
+                    <img src="http://openweathermap.org/img/wn/{{ current.weather[0].icon }}@4x.png" alt="Icon" class="w-32 h-32">
+                    <div class="text-left">
+                        <p class="text-8xl font-bold">{{ current.main.temp | round(1) }}°C</p>
+                        <p class="text-2xl text-gray-600 capitalize">{{ current.weather[0].description }}</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-8 mt-8 border-t pt-8 w-full max-w-xs">
+                    <div class="text-center">
+                        <span class="block text-sm opacity-60">{{ _("Humidity") }}</span>
+                        <span class="font-bold">{{ current.main.humidity }}%</span>
+                    </div>
+                    <div class="text-center">
+                        <span class="block text-sm opacity-60">{{ _("Wind") }}</span>
+                        <span class="font-bold">{{ current.wind.speed }} m/s</span>
+                    </div>
+                    <div class="text-center">
+                        <span class="block text-sm opacity-60">{{ _("Feels Like") }}</span>
+                        <span class="font-bold">{{ current.main.feels_like | round(1) }}°C</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activity Recommendation -->
+            <div class="bg-yellow-400 rounded-3xl p-8 shadow-xl text-gray-900 flex flex-col justify-center items-center">
+                <h2 class="text-xl font-bold mb-4 opacity-80 uppercase tracking-widest text-center">{{ _("Recommendation") }}</h2>
+                <div class="text-5xl mb-4">{{ rec.icon }}</div>
+                <h3 class="text-2xl font-extrabold mb-2 text-center leading-tight">{{ rec.title }}</h3>
+                <p class="text-center text-lg bg-yellow-300/50 p-4 rounded-xl italic">
+                    "{{ rec.text }}"
+                </p>
+            </div>
+        </div>
+
+        <!-- Forecast Section -->
+        <div class="glass rounded-3xl p-8 shadow-xl text-gray-800">
+            <h2 class="text-2xl font-bold mb-6 px-4">{{ _("7 Day Forecast") }}</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full min-w-[600px]">
+                    <thead>
+                        <tr class="text-left border-b text-gray-400 uppercase text-xs tracking-widest">
+                            <th class="pb-4 px-2">{{ _("Day") }}</th>
+                            <th class="pb-4 px-2">{{ _("Condition") }}</th>
+                            <th class="pb-4 px-2">{{ _("Temp") }}</th>
+                            <th class="pb-4 px-2">{{ _("Humidity") }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in forecast %}
+                        <tr class="border-b last:border-0 hover:bg-gray-50 transition">
+                            <td class="py-4 px-2 font-medium">{{ item.dt_txt.split(' ')[0] }}</td>
+                            <td class="py-4 px-2 capitalize">{{ item.weather[0].description }}</td>
+                            <td class="py-4 px-2">
+                                <span class="font-bold text-blue-600">{{ item.main.temp | round(1) }}°C</span>
+                            </td>
+                            <td class="py-4 px-2">{{ item.main.humidity }}%</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center mt-12 text-white/60 text-sm">
+        {{ _("Powered by OpenWeatherMap & Flask") }}
+    </footer>
+</body>
+</html>

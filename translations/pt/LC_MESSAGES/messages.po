@@ -1,0 +1,33 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+Date: Fri Jun 10 2026 10:00:00 UTC\n
+
+# Context: Weather Dashboard UI Labels
+
+msgid "Weather Dashboard"
+msgstr "Painel Meteorológico"
+
+msgid "Update: Just Now"
+msgstr "Atualização: Agora mesmo"
+
+msgid "Current Weather"
+msgstr "Clima Atual"
+
+msgid "Humidity"
+msgstr "Umidade"
+
+msgid "Wind"
+msgstr "Vento"
+
+msgid "Feels Like"
+msgstr "Sensação Térmica"
+
+msgid "Recommendation"
+msgstr "Recomendação"
+
+msgid "7 Day Forecast"
+msgstr "Previsão para 7 Dias"
+
+msgid "Powered by OpenWeatherMap & Flask"
+msgstr "Movido por OpenWeatherMap e Flask"
